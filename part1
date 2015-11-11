@@ -1,0 +1,68 @@
+/*Author: Céin O'Rourke 
+Student# C14427818*/
+
+
+void setup()
+{
+  size(600,600);
+  background(0);
+  stroke(255);
+
+  stroke(255, 0, 0);
+  line( border,border,border,height-border);
+  stroke(255, 0, 0);
+  line( border,height-border,width-border - 350,height-border);
+}
+
+int border = 40;
+
+void draw()
+{
+  
+  int numberOfLines = 10;
+  float sizeOfLine = height-(2*border);
+  float m = map( 120 , 0 ,1200, 0 , sizeOfLine );
+  float place = border;
+  int num = numberOfLines * 120;
+ 
+ 
+  for( int i = 0 ; i < numberOfLines+1 ; ++i, place+=m , num-=120)
+  {
+    line(border-10,place,border,place);
+    text(num , border-35 , place);
+  }
+  
+  float numberOfLinesTwo = 4;
+  float c = map( 1 , 0 , 10 , 0 , sizeOfLine );
+  float placeTwo = border;
+  int numTwo = 2012;
+ 
+ 
+  for( int i = 0 ; i < numberOfLinesTwo; i++, placeTwo+=c, numTwo +=1)
+  {
+    line(placeTwo,height-border,placeTwo,height-border+10);
+    text(numTwo , placeTwo , height - 10 );
+  }
+  
+   ArrayList<Float> datalist = new ArrayList<Float>();
+   String[] data = loadStrings("sum.csv");
+   
+   for(String s:data)
+   {
+     float f = Float.parseFloat(s);
+     datalist.add(f);
+   }
+
+   float d = map(1, 0, 160, 0, sizeOfLine);
+   float placeThree = border;
+   for( int i = 1 ; i < datalist.size() ; i++ , placeThree+=d)
+   {
+     stroke( 0 , 255 , 255);
+     float x = map(datalist.get(i-1) , 0 , 1200 , 0 , sizeOfLine);
+     float z = map(datalist.get(i) , 0, 1200 , 0 , sizeOfLine);
+     line(placeThree, height-border-x , placeThree+d , height-border-z);
+     
+   }
+   
+   text("Global Solar Radiation in Joules/cm3 for Dublin_Airport (Monthly)", width/4, border-5); 
+}
